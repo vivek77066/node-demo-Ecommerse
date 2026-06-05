@@ -6,6 +6,8 @@ import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 import { findUser } from "../service/user.service";
 import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
+import jwt from "jsonwebtoken";
+import User from "../model/user.model";
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   const { email, password } = req.body;
@@ -21,10 +23,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     });
     return;
   }
-  console.log("=====")
-  console.log(user, user.password);
+ 
   const isMatch = await bcrypt.compare(password, user.password);
-  console.log("isMatch", isMatch);
   if (!isMatch) {
     res.status(500).send({
       success: false,
@@ -99,3 +99,43 @@ export const changePassword = async (
     message: "Password changed successfully",
   });
 };
+
+
+export const refreshTokenController = async (req: Request, res: Response) => {
+  const {refreshToken} = req.body;
+  
+
+ if (!refreshToken) {
+   res.status(401).json({
+     success: false,
+     message: "Refresh token required",
+   });
+
+   return;
+  }
+  
+  const decoded = jwt.verify(refreshToken, process.env.REFRESH_SECRATE!) as {
+    _id: string;
+    email: string;
+  };
+const user = await User.findById(decoded._id);
+
+if (!user) {
+  res.status(404).json({
+    success: false,
+    message: "User not found",
+  });
+
+  return;
+  }
+
+   const accessToken = generateAccessToken(user);
+
+   res.status(200).json({
+     success: true,
+     accessToken,
+   });
+  
+
+
+}
