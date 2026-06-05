@@ -1,4 +1,9 @@
-import { changePassword, login, register } from "../controller/auth.controller";
+import {
+  changePassword,
+  login,
+  register,
+  refreshTokenController as refreshToken,
+} from "../controller/auth.controller";
 import { validation } from "../middleware/validate.middleware"
 import { registerSchema,loginSchema,changePasswordSchema } from "../validators/auth.validation";
 
@@ -10,7 +15,9 @@ const router = express.Router();
 
 router.post("/register",validation(registerSchema), asyncHandler(register));
 router.post("/login", validation(loginSchema), asyncHandler(login));
-router.patch("/forget-password", protect, validation(changePasswordSchema),asyncHandler(changePassword));
+router.patch("/forget-password", protect, validation(changePasswordSchema),
+    asyncHandler(changePassword));
+router.post("/refresh-token",asyncHandler(refreshToken));
 
 
 export default router;
