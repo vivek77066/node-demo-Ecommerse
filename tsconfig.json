@@ -52,9 +52,10 @@
 
     "moduleResolution": "NodeNext",
 
-    "rootDir": "./src",
+    "rootDir": ".",
 
     "outDir": "./dist",
+    "sourceMap": true,
 
     "strict": true,
 
@@ -62,8 +63,28 @@
 
     "skipLibCheck": true,
 
-    "forceConsistentCasingInFileNames": true
-  },
+    "forceConsistentCasingInFileNames": true,
+       "ignoreDeprecations": "6.0",
+      "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
 
-  "include": ["src/**/*"]
+      "@models/*": ["src/model/*"],
+
+      "@controllers/*": ["src/controller/*"],
+
+      "@services/*": ["src/service/*"],
+
+      "@utils/*": ["src/utils/*"],
+       "@validators/*": ["src/validators/*"],
+        "@middlewares/*": ["src/middleware/*"],
+        "@routes/*": ["src/routes/*"],
+        "@DB/*":["src/DB/*"]
+
+    
+    }
+  },
+ "include": [
+    "**/*.ts"
+  ]
 }

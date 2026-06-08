@@ -1,4 +1,4 @@
-import Product, { IProduct } from "../model/product.model";
+import Product, { IProduct } from "@models/product.model";
 
 export const creatProduct = async (productData:IProduct):Promise<IProduct> => {
     return Product.create(productData);

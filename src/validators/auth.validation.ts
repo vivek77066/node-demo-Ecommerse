@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { addressSchema } from "./user.validation";
+import { addressSchema } from "@validators/user.validation";
 
 
 export const changePasswordSchema = z.object({
