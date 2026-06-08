@@ -1,17 +1,17 @@
 import {
   findUserByIdService,
   register as registerService,
-} from "../service/auth.service";
+} from "@services/auth.service";
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
-import { findUser } from "../service/user.service";
-import { generateAccessToken, generateRefreshToken } from "../utils/jwt";
+import { findUser } from "@services/user.service";
+import { generateAccessToken, generateRefreshToken } from "@utils/jwt";
 import jwt from "jsonwebtoken";
-import User from "../model/user.model";
+import User from "@models/user.model";
 
 export const login = async (req: Request, res: Response): Promise<void> => {
+
   const { email, password } = req.body;
-  console.log(email, password);
   const filter = {
     email: email,
   };

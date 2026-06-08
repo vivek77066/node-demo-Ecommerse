@@ -1,13 +1,14 @@
 import express from "express"
-import { getOrder,createOrder,updateOrder,deleteOrder } from "../controller/order.controller";
-import { protect } from "../middleware/auth.middleware";
-import { asyncHandler } from "../utils/asyncHandler";
+import { getOrder,createOrder,updateOrder,deleteOrder, getListOrders } from "@/controller/order.controller";
+import { protect } from "@middlewares/auth.middleware";
+import { asyncHandler } from "@utils/asyncHandler";
 
 const route = express.Router();
 
-route.get("/order", protect, asyncHandler(getOrder));
-route.post("/order", protect, asyncHandler(createOrder));
-route.patch("/order/:id", protect, asyncHandler(updateOrder));
-route.delete("/order/:id", protect, asyncHandler(deleteOrder));
+route.get("/",  asyncHandler(getOrder));
+route.post("/", protect, asyncHandler(createOrder));
+route.patch("/:id", protect, asyncHandler(updateOrder));
+route.delete("/:id", protect, asyncHandler(deleteOrder));
+route.get("/order-pip",getListOrders)
 
 export default route;

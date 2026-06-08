@@ -1,10 +1,10 @@
 
-import { findUserByIdService } from "../service/auth.service";
+import { findUserByIdService } from "@services/auth.service";
 import {
   getUsers as getUserService,
   deleteUser as deleteUserService,
   updateUser as updateUserService,
-} from "../service/user.service";
+} from "@services/user.service";
 import { Request, Response } from "express";
 
 export const getUsers = async (req: Request, res: Response): Promise<void> => {
@@ -31,6 +31,7 @@ export const updateUser = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
+
   const userId = req.params.id as string;
     const { name, email, age, phone, address } = req.body
     

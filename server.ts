@@ -1,21 +1,20 @@
 import express from "express"
 import connectDB from "./src/DB/config"
+import { errorHandler } from "@middlewares/errorHandler";
+import routes from '@routes/index'
+
+
+
 connectDB();
-import userRoute from './src/routes/user.route'
-import authRoute from './src/routes/auth.route'
-import { errorHandler } from "./src/middleware/errorHandler";
-import productRoute from "./src/routes/product.route"
-import orderRoute from "./src/routes/order.route"
-
 const app = express();
-app.use(express.json());
+
+
+ app.use(express.json());
 
 
 
-app.use("/api/v1", userRoute);
-app.use("/api/v1", authRoute);
-app.use("/api/v1", productRoute);
-app.use("/api/v1", orderRoute);
+app.use("/api/v1", routes);
+
 
 app.use(errorHandler);
 

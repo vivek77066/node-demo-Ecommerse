@@ -1,5 +1,5 @@
 
-import { creatProduct as creatProductService,getProduct as getProductService ,updateProduct as updateUserService,deleteProduct as deleteProductService} from "../service/product.service";
+import { creatProduct as creatProductService,getProduct as getProductService ,updateProduct as updateUserService,deleteProduct as deleteProductService} from "@services/product.service";
 import { Request,Response } from "express";
 
 

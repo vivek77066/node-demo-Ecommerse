@@ -1,4 +1,4 @@
-import Order, { IOrder } from "../model/order.model";
+import Order, { IOrder } from "@models/order.model";
 
 export const createOrder = async (orderData:IOrder): Promise<IOrder> => {
     return Order.create(orderData)

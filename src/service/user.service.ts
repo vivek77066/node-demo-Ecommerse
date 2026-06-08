@@ -1,6 +1,6 @@
-import User from "../model/user.model";
-import { IUser } from "../model/user.model";
-import { UpdateUserDTO } from "../validators/user.validation";
+import User from "@models/user.model";
+import { IUser } from "@models/user.model";
+import { UpdateUserDTO } from "@validators/user.validation";
 
 export const getUsers = async (): Promise<IUser[]> => {
     return User.find();

@@ -1,7 +1,7 @@
 
-import { success } from "zod";
-import { createOrder as createOrderService, deleteOrder as deleteProductService, updateOrder as updateOrderService, getOrder as getOrderService } from "../service/order.service";
+import { createOrder as createOrderService, deleteOrder as deleteProductService, updateOrder as updateOrderService, getOrder as getOrderService } from "@services/order.service";
 import { Request, Response } from "express";
+import User from "@models/user.model";
 
 
 
@@ -53,4 +53,18 @@ export const updateOrder = async (req: Request, res: Response): Promise<void> =>
         success: true,
         data: updateOrder
     });
+}
+
+export const getListOrders = async (req: Request, res: Response) => {
+   const user=await User.aggregate([
+     {
+       $match: {
+         orders: {
+           $exists: true,
+           $ne: [],
+         },
+       },
+     },
+   ]);
+    console.log(user, "user");
 }

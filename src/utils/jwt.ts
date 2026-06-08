@@ -1,7 +1,12 @@
 import jwt from "jsonwebtoken";
-import { IUser } from "../model/user.model";
+import { IUser } from "@models/user.model";
 
 export const generateAccessToken = (user: IUser): string => {
+  console.log(
+    "inside the ",
+    process.env.ACCESS_EXPIRY,
+    process.env.ACCESS_SECRATE,
+  );
   return jwt.sign(
     {
       _id: user._id,
@@ -15,6 +20,8 @@ export const generateAccessToken = (user: IUser): string => {
 };
 
 export const generateRefreshToken = (user: IUser): string => {
+  console.log(process.env.REFRESH_SECRATE);
+  console.log(process.env.REFRESH_EXPIRY);
   return jwt.sign(
     {
       _id: user._id,
